@@ -19,3 +19,13 @@ stages:
             provider: 'azurerm'
             command: 'validate'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            backendServiceArm: 'svc_test'
+            backendAzureRmResourceGroupName: 'resttest'
+            backendAzureRmStorageAccountName: 'regtrwser'
+            backendAzureRmContainerName: 'rtsrs'
+            backendAzureRmKey: 'terraform.tfstate'
