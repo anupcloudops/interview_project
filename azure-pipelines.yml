@@ -57,6 +57,10 @@ stages:
       - job: terraform_apply
         dependsOn: terraform_plan
         steps:
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: 'cp "$(tfvars.secureFilePath)" "$(System.DefaultWorkingDirectory)/env/dev/terraform.tfvars"'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
