@@ -72,4 +72,5 @@ stages:
             provider: 'azurerm'
             command: 'apply'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            commandOptions: '-auto-approve'
             environmentServiceNameAzureRM: 'svc_test'
