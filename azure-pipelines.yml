@@ -1,0 +1,20 @@
+trigger:
+ branches:
+   - main
+   - features/*
+
+pool: asr
+
+stages:
+  - stage: infra-build
+    jobs:
+      - job: terraform-
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
