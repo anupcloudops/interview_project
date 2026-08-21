@@ -53,3 +53,23 @@ stages:
             command: 'plan'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             environmentServiceNameAzureRM: 'svc_test'
+
+      - job: terraform_apply
+        dependsOn: terraform_plan
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            backendServiceArm: 'svc_test'
+            backendAzureRmResourceGroupName: 'resttest'
+            backendAzureRmStorageAccountName: 'regtrwser'
+            backendAzureRmContainerName: 'rtsrs'
+            backendAzureRmKey: 'terraform.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            environmentServiceNameAzureRM: 'svc_test'
