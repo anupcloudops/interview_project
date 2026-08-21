@@ -1,14 +1,15 @@
 trigger:
  branches:
-   - main
-   - features/*
+  include:
+    - main
+    - features/*
 
 pool: asr
 
 stages:
-  - stage: infra-build
+  - stage: infra_build
     jobs:
-      - job: terraform-
+      - job: terraform_validate
         steps:
         - task: TerraformInstaller@1
           inputs:
