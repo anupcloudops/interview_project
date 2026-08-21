@@ -57,6 +57,10 @@ stages:
       - job: terraform_apply
         dependsOn: terraform_plan
         steps:
+        - task: DownloadSecureFile@1
+          name: tfvars
+          inputs:
+            secureFile: 'terraform.tfvars'
         - task: Bash@3
           inputs:
             targetType: 'inline'
